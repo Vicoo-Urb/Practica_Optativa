@@ -1,4 +1,5 @@
 from tkinter import *
+import base64
 
 #Propiedades de la venta
 ventana=Tk()
@@ -6,6 +7,13 @@ ventana.title("Base 64")
 ventana.resizable(0,0)
 ventana.geometry("670x700")
 
+#Definición de funciones
+def aceptar():
+    frase_texto = frase.get() 
+    origen = frase_texto.encode("UTF-8")
+    e = base64.b64encode(origen)
+    resultado1 = e.decode("UTF-8")
+    print("Codificación: ", resultado1)
 
 #Propiedades de los textos principales
 titulo = Label(ventana, text="Bienvenido", font=("Comic Sans MS", 25))
@@ -21,7 +29,11 @@ instruccion.grid(row=3,column=1, columnspan=2, pady=15)
 fraselab = Label(ventana, text="Frase", font=("Comic Sans MS", 12))
 fraselab.grid(row=4, column=1,sticky="e")
 
-ctxfrase = Entry(ventana,  font=("Comic Sans MS", 12))
+#Declaración de variables
+frase = StringVar()
+resultado=StringVar()
+
+ctxfrase = Entry(ventana,  font=("Comic Sans MS", 12), textvariable=frase )
 ctxfrase.grid(row=4, column=2, ipadx=80, ipady=8, pady=15, sticky="w")
 
 resultadolab = Label(ventana, text="Resultado", font=("Comic Sans MS", 13))
@@ -31,7 +43,7 @@ ctxresultado = Text(ventana, state='disabled', font=("Comic Sans MS", 12), width
 ctxresultado.grid(row=5, column=2,  ipadx=80, ipady=8, pady=15, sticky="w")
 
 #Boton resultado
-btaceptar = Button(ventana, text="Aceptar", font=("Comic Sans MS", 12))
+btaceptar = Button(ventana, text="Aceptar", font=("Comic Sans MS", 12), command=aceptar)
 btaceptar.grid(row=6, column=1, columnspan=2)
 
 instruccion2 = Label(ventana, text="Para poder decifrar una frase es necesario primero haber cifrado una frase", font=("Comic Sans MS", 13))
